@@ -9,23 +9,28 @@ loginBtn.addEventListener("click", function () {
 // deposit event handler
 const depositBtn = document.getElementById("depositBtn");
 depositBtn.addEventListener("click", function () {
-  const depositAmount = document.getElementById("depositAmount").value;
-  const depositNum = parseFloat(depositAmount);
-
-  // const currentDeposit = document.getElementById("currentDeposit").innerText;
-  // const currentDepositNumber = parseFloat(currentDeposit);
-  // const totalDeposit = depositNum + currentDepositNumber;
-  // document.getElementById("currentDeposit").innerText = totalDeposit;
-
-  // const amountBalance = document.getElementById("amountBalance").innerText;
-  // const amountBalanceNumber = parseFloat(amountBalance);
-  // const totalAmount = depositNum + amountBalanceNumber;
-  // document.getElementById("amountBalance").innerText = totalAmount;
-
+  const depositNum = getInputNumber("depositAmount");
   updateSpanText("currentDeposit", depositNum);
   updateSpanText("amountBalance", depositNum);
   document.getElementById("depositAmount").value = "";
 });
+
+// withdraw event handler
+const withdrawBtn = document.getElementById("withdrawBtn");
+withdrawBtn.addEventListener("click", function () {
+  const withdrawNumber = getInputNumber("withdrawAmount");
+  updateSpanText("withdrawBalance", withdrawNumber);
+  updateSpanText("amountBalance", -1 * withdrawNumber);
+  document.getElementById("withdrawAmount").value = "";
+});
+
+// get input number
+function getInputNumber(id) {
+  const amount = document.getElementById(id).value;
+  const amountNumber = parseFloat(amount);
+  return amountNumber;
+}
+
 // total amount and desposit convert
 function updateSpanText(id, depositNum) {
   const current = document.getElementById(id).innerText;
